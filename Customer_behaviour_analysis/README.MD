@@ -25,7 +25,7 @@ and ending with business-ready insights through dashboard visualization.
 <h2>🖼️ Dashboard Preview</h2>
 
 <p align="center">
-  <img src="images/customer_behavior_dashboard.png"
+  <img src="images/Screenshot 2025-12-20 111504.png"
        alt="Customer Behavior Dashboard"
        width="900"/>
 </p>
