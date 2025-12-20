@@ -1,119 +1,139 @@
-<h1 align="center">🛒 Customer Shopping Behavior Analysis</h1>
+<h1 align="center">📊 Customer Behavior Dashboard & Analysis</h1>
 
 <p align="center">
-  <b>End-to-end data analysis project using Python, SQL, and Power BI</b>
+  <b>Customer Shopping Behavior Analysis using Python, SQL, and Dashboard Visualization</b>
 </p>
 
 <hr>
 
-<h2>📌 Project Overview</h2>
+<h2>🧾 Project Overview</h2>
+
 <p>
-This project analyzes customer shopping behavior for a retail company to understand
-purchase patterns, customer segments, and factors influencing buying decisions.
-The analysis covers demographics, product categories, discounts, subscriptions,
-shipping preferences, and repeat purchases.
+This project focuses on understanding customer shopping behavior for a retail business
+by analyzing purchasing patterns, customer demographics, and engagement trends.
+The main objective is to identify how different factors such as age, gender, product category,
+subscription status, and shipping preferences influence customer decisions.
 </p>
 
 <p>
-The goal is to generate actionable business insights that help improve
-<strong>customer engagement</strong>, <strong>marketing strategies</strong>,
-and <strong>long-term loyalty</strong>.
+The project follows a complete data analytics workflow, starting from raw data understanding
+and ending with business-ready insights through dashboard visualization.
 </p>
 
 ---
 
-<h2>📂 Dataset Summary</h2>
+<h2>🖼️ Dashboard Preview</h2>
 
-<ul>
-  <li><b>Total Rows:</b> 3,900</li>
-  <li><b>Total Columns:</b> 18</li>
-</ul>
+<p align="center">
+  <img src="images/customer_behavior_dashboard.png"
+       alt="Customer Behavior Dashboard"
+       width="900"/>
+</p>
 
-<p><b>Key Data Includes:</b></p>
-<ul>
-  <li>Customer details: Age, Gender, Customer ID</li>
-  <li>Product details: Item Purchased, Category, Size, Color, Season</li>
-  <li>Transaction data: Purchase Amount, Location, Shipping Type, Payment Method</li>
-  <li>Behavior data: Review Rating, Subscription Status, Discounts, Promo Codes</li>
-  <li>Customer history: Previous Purchases</li>
-</ul>
+<p align="center">
+  <i>
+    Interactive dashboard highlighting customer count, average purchase value,
+    review ratings, category sales, age group performance, and subscription insights
+  </i>
+</p>
 
 ---
 
-<h2>🧪 Exploratory Data Analysis (Python)</h2>
+<h2>📂 Dataset Description</h2>
 
-<h4>🔹 Data Loading</h4>
+<p>
+The dataset contains customer-level shopping data collected from a retail business.
+It includes demographic information, product details, transaction records,
+and customer behavior indicators.
+</p>
 
-```python
-import pandas as pd
-df = pd.read_csv("customer_shopping_behavior.csv")
-df.head()
+<p>
+Key information covered in the dataset includes customer age and gender,
+items purchased across multiple categories, purchase amounts,
+shipping methods, payment preferences, review ratings,
+discount usage, and previous purchase history.
+</p>
 
-<h4>🔹 Dataset Structure</h4>
-df.shape
-df.info()
+<p>
+The data supports analysis across both online and offline shopping behavior,
+making it suitable for identifying trends, patterns, and loyalty drivers.
+</p>
 
-<h4>🔹 Missing Values Check</h4>
-df.isnull().sum()
+---
 
-<h4>🔹 Descriptive Statistics</h4>
-df.describe()
+<h2>🔍 Analysis Approach</h2>
 
-<h4>🔹 Categorical Analysis</h4>
-df['Category'].value_counts()
-df['Season'].value_counts()
+<p>
+The analysis began with exploratory data analysis to understand the structure,
+distribution, and quality of the data.
+Customer demographics and product-related variables were examined
+to identify high-performing groups and categories.
+</p>
 
-<h4>🔹 Duplicate Records</h4>
-df.duplicated().sum()
+<p>
+Business-focused analysis was then performed to compare spending behavior
+across gender, age groups, subscription status, shipping types,
+and product categories.
+Special attention was given to understanding repeat customers,
+loyal buyers, and the impact of discounts on spending.
+</p>
 
-<h2>🗄️ Business Analysis Using SQL</h2> <h4>1️⃣ Revenue by Gender</h4>
-SELECT gender, SUM(purchase_amount) AS revenue
-FROM customer
-GROUP BY gender;
+---
 
-<h4>2️⃣ High-Spending Discount Users</h4>
-SELECT customer_id, purchase_amount
-FROM customer
-WHERE discount_applied = 'Yes'
-AND purchase_amount >= (
-  SELECT AVG(purchase_amount) FROM customer
-);
+<h2>📊 Dashboard Insights</h2>
 
-<h4>3️⃣ Top 5 Rated Products</h4>
-SELECT TOP 5 item_purchased, AVG(review_rating) AS avg_rating
-FROM customer
-GROUP BY item_purchased
-ORDER BY avg_rating DESC;
+<p>
+The dashboard provides a high-level view of customer behavior using key metrics
+such as total customers, average purchase amount, and average review rating.
+Category-level analysis shows which product groups contribute the most to revenue,
+while age-group analysis highlights the most valuable customer segments.
+</p>
 
-<h4>4️⃣ Shipping Type Spend Comparison</h4>
-SELECT shipping_type, AVG(purchase_amount) AS avg_purchase
-FROM customer
-WHERE shipping_type IN ('Express', 'Standard')
-GROUP BY shipping_type;
+<p>
+Subscription analysis reveals the proportion of subscribed versus non-subscribed customers,
+and shipping analysis helps compare customer spending across delivery options.
+Interactive filters allow users to explore patterns by gender, category,
+subscription status, and shipping type.
+</p>
 
-<h4>5️⃣ Subscription Impact on Spending</h4>
-SELECT subscription_status,
-COUNT(customer_id) AS total_customers,
-ROUND(AVG(purchase_amount),2) AS avg_spend,
-ROUND(SUM(purchase_amount),2) AS total_revenue
-FROM customer
-GROUP BY subscription_status;
+---
 
-<h4>6️⃣ Customer Segmentation</h4>
-WITH customer_type AS (
-  SELECT customer_id, previous_purchases,
-  CASE
-    WHEN previous_purchases = 1 THEN 'New'
-    WHEN previous_purchases BETWEEN 2 AND 10 THEN 'Returning'
-    ELSE 'Loyal'
-  END AS customer_segment
-  FROM customer
-)
-SELECT customer_segment, COUNT(*) AS customer_count
-FROM customer_type
-GROUP BY customer_segment;
+<h2>💡 Business Recommendations</h2>
 
-<h2>📊 Dashboard</h2> <p> An interactive dashboard was created using <b>Power BI</b> to visualize: </p> <ul> <li>Revenue trends</li> <li>Customer segments</li> <li>Category-wise performance</li> <li>Subscription and shipping behavior</li> </ul>
-<h2>💡 Business Recommendations</h2> <ul> <li>Focus more on female customers by improving ads and product design</li> <li>Enhance subscription benefits to increase subscriber spending</li> <li>Convert loyal customers into subscribers using targeted offers</li> <li>Promote best-selling products by category</li> <li>Encourage express shipping for high-value orders</li> </ul>
-<h2>🧠 Key Skills Demonstrated</h2> <ul> <li>Python (Pandas, EDA)</li> <li>SQL for business analysis</li> <li>Customer segmentation</li> <li>Dashboard creation (Power BI)</li> <li>Business insight generation</li> </ul>
-<h2>✅ Conclusion</h2> <p> This project demonstrates an end-to-end data analysis workflow, from raw data to business recommendations. It reflects real-world analytical thinking and decision-making skills. </p> ```
+<p>
+Based on the insights generated from the analysis and dashboard,
+several actionable recommendations can be made.
+These include increasing focus on high-revenue customer segments,
+improving subscription offerings to drive adoption,
+promoting best-selling product categories,
+and encouraging faster shipping options for higher-value orders.
+</p>
+
+<p>
+Targeting loyal and repeat customers with personalized offers
+can further improve customer retention and long-term revenue.
+</p>
+
+---
+
+<h2>🛠️ Tools & Technologies</h2>
+
+<p>
+This project was completed using industry-standard data analytics tools.
+Python was used for data exploration and analysis,
+SQL was used for business-level data querying,
+and a dashboard tool was used to visualize insights
+in a clear and interactive format.
+</p>
+
+---
+
+<h2>✅ Conclusion</h2>
+
+<p>
+This project demonstrates the ability to convert raw customer data
+into meaningful business insights through structured analysis
+and dashboard storytelling.
+It reflects a real-world retail analytics use case
+and highlights practical data analyst skills.
+</p>
